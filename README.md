@@ -3,6 +3,10 @@
 ## Usage
 
 ```
+yarn add bittrex-typescript
+```
+
+```
 import {BittrexClient, Ticker} from 'bittrex-typescript';
 
 const bittrex: Bittrex = new Bittrex({
