@@ -64,7 +64,6 @@ export class Transport {
 	private handleResponse<T>(responseType: ClassType<T>, response: got.Response<Object>): Promise<T | T[]> {
 		return new Promise<T | T[]>((resolve, reject) => {
 			let bittrexResponse: BittrexResponse = this.jsonConvert.deserialize(response.body, BittrexResponse);
-			console.log(bittrexResponse);
 			if (bittrexResponse.success) {
 				let converted: any;
 				if (bittrexResponse.result instanceof Array) {
