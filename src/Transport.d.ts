@@ -6,7 +6,7 @@ export declare type ClassType<T> = {
 export interface TransportOptions {
     key: string;
     secret: string;
-    version?: '1.0' | '1.1';
+    baseUrl: string;
     agent?: boolean | Agent;
 }
 export declare class BittrexResponse {
@@ -15,10 +15,9 @@ export declare class BittrexResponse {
     result: object | object[] | null;
 }
 export declare class Transport {
-    private transportOptions;
+    transportOptions: Partial<TransportOptions>;
     private jsonConvert;
-    private readonly baseUrl;
-    constructor({key, secret, version, agent}: Partial<TransportOptions>);
+    constructor(transportOptions: Partial<TransportOptions>);
     request<T>(responseType: ClassType<T>, pathname: string, data?: {}): Promise<T | T[]>;
     private handleResponse<T>(responseType, response);
     private prepareRequest(pathname, data?);

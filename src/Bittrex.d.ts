@@ -1,7 +1,6 @@
 import { BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderData, TickerData } from './model';
 import { TransportOptions } from './Transport';
 export interface Bittrex {
-    options: TransportOptions;
     markets(): Promise<MarketData[]>;
     currencies(): Promise<CurrencyData[]>;
     ticker(market: string): Promise<TickerData>;
@@ -14,8 +13,8 @@ export interface Bittrex {
     orders(market?: string): Promise<OrderData[]>;
 }
 export declare class BittrexClient implements Bittrex {
-    options: TransportOptions;
     private transport;
+    private static BASE_URL;
     constructor(options: TransportOptions);
     markets(): Promise<MarketData[]>;
     currencies(): Promise<CurrencyData[]>;

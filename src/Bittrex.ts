@@ -2,8 +2,6 @@ import {BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderData, Tic
 import {TransportOptions, Transport} from './Transport';
 
 export interface Bittrex {
-	options: TransportOptions;
-
 	// public
 
 	markets(): Promise<MarketData[]>;
@@ -35,8 +33,10 @@ export interface Bittrex {
 
 export class BittrexClient implements Bittrex {
 	private transport: Transport;
+	private static BASE_URL: string = 'https://bittrex.com/api/v1.1';
 
-	constructor(public options: TransportOptions) {
+	constructor(options: TransportOptions) {
+		options.baseUrl = BittrexClient.BASE_URL;
 		this.transport = new Transport(options);
 	}
 

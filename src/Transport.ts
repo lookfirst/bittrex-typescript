@@ -12,7 +12,7 @@ export declare type ClassType<T> = {
 export interface TransportOptions {
 	key: string;
 	secret: string;
-	version?: '1.0' | '1.1';
+	baseUrl: string;
 	agent?: boolean | Agent;
 }
 
@@ -27,25 +27,13 @@ export class BittrexResponse {
 }
 
 export class Transport {
-	private transportOptions: TransportOptions;
 	private jsonConvert: JsonConvert = new JsonConvert();
 
-	private get baseUrl() {
-		return `https://bittrex.com/api/v${this.transportOptions.version}`;
-	}
+	constructor(public transportOptions: Partial<TransportOptions>) {
+		assert(!!this.transportOptions.key, 'key is required');
+		assert(!!this.transportOptions.secret, 'secret is required');
 
-	constructor({key, secret, version = '1.1', agent = false}: Partial<TransportOptions>) {
-		assert(!!key, 'key is required');
-		assert(!!secret, 'secret is required');
-
-		this.transportOptions = {
-			key: key,
-			secret: secret,
-			version: version,
-			agent: agent
-		};
-
-		if (agent && typeof agent === 'boolean') {
+		if (this.transportOptions.agent && typeof this.transportOptions.agent === 'boolean') {
 			this.transportOptions.agent = new Agent({
 				keepAlive: true,
 				maxSockets: 100,
@@ -73,7 +61,7 @@ export class Transport {
 	}
 
 	private prepareRequest(pathname: string, data = {}) {
-		const url = `${this.baseUrl}${pathname}`;
+		const url = `${this.transportOptions.baseUrl}${pathname}`;
 
 		const query = {
 			apikey: this.transportOptions.key,
