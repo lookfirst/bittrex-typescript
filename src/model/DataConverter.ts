@@ -1,6 +1,10 @@
 import {JsonConverter, JsonCustomConvert} from 'json2typescript';
 import BigNumber from 'bignumber.js';
 
+// Disable the error about 15 decimal places
+// Happens during Bittrex.marketSummaries()
+BigNumber.config({ ERRORS: false });
+
 @JsonConverter
 export class DateConverter implements JsonCustomConvert<Date> {
 	serialize(date: Date): any {
