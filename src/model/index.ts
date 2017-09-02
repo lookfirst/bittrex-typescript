@@ -5,3 +5,4 @@ export {MarketSummaryData} from './MarketSummaryData';
 export {OrderBookData} from './OrderBookData';
 export {OrderData} from './OrderData';
 export {TickerData} from './TickerData';
+export {UuidData} from './UuidData';

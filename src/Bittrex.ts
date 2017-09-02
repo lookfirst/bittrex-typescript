@@ -1,34 +1,57 @@
-import {BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderBookData, OrderData, TickerData} from './model';
+import {
+	BalanceData,
+	CurrencyData,
+	MarketData,
+	MarketSummaryData,
+	OrderBookData,
+	OrderData,
+	TickerData,
+	UuidData
+} from './model';
 import {Transport} from './Transport';
 import {Agent} from 'https';
 import {OrderBookItem} from './model/OrderBookData';
+import BigNumber from 'bignumber.js';
 
 export interface Bittrex {
 	// public
 
 	markets(): Promise<MarketData[]>;
+
 	currencies(): Promise<CurrencyData[]>;
+
 	ticker(market: string): Promise<TickerData>;
+
 	marketSummary(market: string): Promise<MarketSummaryData>;
+
 	marketSummaries(): Promise<MarketSummaryData[]>;
+
 	orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
+
 	// marketHistory(market: string): Promise<MarketHistory[]>;
 
 	// market
 
-	// buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<OrderResult>;
-	// sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<OrderResult>;
-	// cancel(uuid: string): Promise<void>;
+	buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
+
+	sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
+
+	cancel(uuid: string): Promise<null>;
+
 	openOrders(market: string): Promise<OrderData[]>;
 
 	// account
 
 	balances(): Promise<BalanceData[]>;
+
 	balance(currency: string): Promise<BalanceData>;
+
 	// depositAddress(currency: string): Promise<DepositAddress>;
 	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
 	order(uuid: string): Promise<OrderData>;
+
 	orders(market?: string): Promise<OrderData[]>;
+
 	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
 	// depositHistory(currency?: string): Promise<Transaction[]>;
 }
@@ -82,6 +105,26 @@ export class BittrexClient implements Bittrex {
 	}
 
 	// market
+
+	public buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData> {
+		return this.transport.request(UuidData, '/market/buylimit', {
+			market: market,
+			quantity: quantity,
+			rate: rate
+		}) as Promise<UuidData>;
+	}
+
+	public sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData> {
+		return this.transport.request(UuidData, '/market/selllimit', {
+			market: market,
+			quantity: quantity,
+			rate: rate
+		}) as Promise<UuidData>;
+	}
+
+	public cancel(uuid: string): Promise<null> {
+		return this.transport.request(null, '/market/cancel', {uuid: uuid}) as Promise<null>;
+	}
 
 	public async openOrders(market?: string): Promise<OrderData[]> {
 		return this.transport.request(OrderData, '/market/getopenorders', {market: market}) as Promise<OrderData[]>;
