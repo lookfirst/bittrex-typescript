@@ -4,7 +4,7 @@ import {Config} from './Config';
 const bittrex = new BittrexClient(Config.bittrex.readonly);
 
 let start = Date.now();
-bittrex.orderHistory().then((orders) => {
+bittrex.orders().then((orders) => {
 	console.log(orders);
 	console.log(`${Date.now() - start}ms`);
 }, (error: any) => {

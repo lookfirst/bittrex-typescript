@@ -27,8 +27,8 @@ export interface Bittrex {
 	balance(currency: string): Promise<BalanceData>;
 	// depositAddress(currency: string): Promise<DepositAddress>;
 	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
-	// order(uuid: string): Promise<Order>;
-	orderHistory(market?: string): Promise<OrderData[]>;
+	order(uuid: string): Promise<OrderData>;
+	orders(market?: string): Promise<OrderData[]>;
 	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
 	// depositHistory(currency?: string): Promise<Transaction[]>;
 }
@@ -40,6 +40,18 @@ export class BittrexClient implements Bittrex {
 		this.transport = new Transport(options);
 	}
 
+	// public
+	public async ticker(market: string): Promise<TickerData> {
+		return this.transport.request(TickerData, '/public/getticker', {market: market}) as Promise<TickerData>;
+	}
+
+	// market
+	public async openOrders(market?: string): Promise<OrderData[]> {
+		return this.transport.request(OrderData, '/market/getopenorders', {market: market}) as Promise<OrderData[]>;
+	}
+
+	// account
+
 	public async balance(currency: string): Promise<BalanceData> {
 		return this.transport.request(BalanceData, '/account/getbalance', {currency: currency}) as Promise<BalanceData>;
 	}
@@ -48,15 +60,11 @@ export class BittrexClient implements Bittrex {
 		return this.transport.request(BalanceData, '/account/getbalances') as Promise<BalanceData[]>;
 	}
 
-	public async ticker(market: string): Promise<TickerData> {
-		return this.transport.request(TickerData, '/public/getticker', {market: market}) as Promise<TickerData>;
+	public async order(uuid: string): Promise<OrderData> {
+		return this.transport.request(OrderData, '/account/getorder', {uuid: uuid}) as Promise<OrderData>;
 	}
 
-	public async orderHistory(market?: string): Promise<OrderData[]> {
+	public async orders(market?: string): Promise<OrderData[]> {
 		return this.transport.request(OrderData, '/account/getorderhistory', {market: market}) as Promise<OrderData[]>;
-	}
-
-	public async openOrders(market?: string): Promise<OrderData[]> {
-		return this.transport.request(OrderData, '/market/getopenorders', {market: market}) as Promise<OrderData[]>;
 	}
 }
