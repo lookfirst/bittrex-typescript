@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import {JsonObject, JsonProperty} from 'json2typescript';
-import {DateConverter} from './DateConverter';
+import {DateConverter, BigNumberConverter} from './DataConverter';
 
 @JsonObject
 export class OrderData {
@@ -14,19 +14,19 @@ export class OrderData {
 	TimeStamp: Date = undefined; // 2014-07-09T04:01:00.667
 	@JsonProperty()
 	OrderType: string = undefined; // LIMIT_BUY
-	@JsonProperty()
+	@JsonProperty('Limit', BigNumberConverter, true)
 	Limit: BigNumber = undefined; // 0.00000001
-	@JsonProperty()
+	@JsonProperty('Quantity', BigNumberConverter, false)
 	Quantity: BigNumber = undefined; // 100000.00000000
-	@JsonProperty()
+	@JsonProperty('QuantityRemaining', BigNumberConverter, false)
 	QuantityRemaining: BigNumber = undefined; // 100000.00000000
-	@JsonProperty('Commission', undefined, true)
+	@JsonProperty('Commission', BigNumberConverter, true)
 	Commission: BigNumber = undefined; // 0.00000000
-	@JsonProperty('CommissionPaid', undefined, true)
+	@JsonProperty('CommissionPaid', BigNumberConverter, true)
 	CommissionPaid: BigNumber = undefined; // 0.00000000
-	@JsonProperty()
+	@JsonProperty('Price', BigNumberConverter, false)
 	Price: BigNumber = undefined; // 0.00000000
-	@JsonProperty()
+	@JsonProperty('PricePerUnit', BigNumberConverter, false)
 	PricePerUnit: BigNumber = undefined; // 0.00000000
 	@JsonProperty()
 	IsConditional: boolean = undefined; // false

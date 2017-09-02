@@ -1,4 +1,4 @@
-import {BalanceData, OrderData, TickerData} from './model';
+import {BalanceData, MarketData, OrderData, TickerData} from './model';
 import {TransportOptions, Transport} from './Transport';
 
 export interface Bittrex {
@@ -6,7 +6,7 @@ export interface Bittrex {
 
 	// public
 
-	// markets(): Promise<Market[]>;
+	markets(): Promise<MarketData[]>;
 	// currencies(): Promise<Currency[]>;
 	ticker(market: string): Promise<TickerData>;
 	// marketSummaries(): Promise<MarketSummary[]>;
@@ -41,11 +41,17 @@ export class BittrexClient implements Bittrex {
 	}
 
 	// public
+
+	public async markets(): Promise<MarketData[]> {
+		return this.transport.request(MarketData, '/public/getmarkets') as Promise<MarketData[]>;
+	}
+
 	public async ticker(market: string): Promise<TickerData> {
 		return this.transport.request(TickerData, '/public/getticker', {market: market}) as Promise<TickerData>;
 	}
 
 	// market
+
 	public async openOrders(market?: string): Promise<OrderData[]> {
 		return this.transport.request(OrderData, '/market/getopenorders', {market: market}) as Promise<OrderData[]>;
 	}
