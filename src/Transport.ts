@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as crypto from 'crypto';
 import * as qs from 'query-string';
 import * as got from 'got';
-import {JsonObject, JsonProperty, JsonConvert} from 'json2typescript';
+import {JsonConvert, JsonObject, JsonProperty} from 'json2typescript';
 import {Agent} from 'https';
 
 export declare type ClassType<T> = {

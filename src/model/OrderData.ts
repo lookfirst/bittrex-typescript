@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import {JsonObject, JsonProperty} from 'json2typescript';
-import {DateConverter, BigNumberConverter} from './DataConverter';
+import {BigNumberConverter, DateConverter} from './DataConverter';
 
 @JsonObject
 export class OrderData {
