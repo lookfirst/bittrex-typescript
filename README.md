@@ -11,15 +11,15 @@ yarn add bittrex-typescript
 ```
 
 ```
-import {Bittrex, BittrexClient, Ticker} from 'bittrex-typescript';
+import {BittrexClient} from 'bittrex-typescript';
 
-const bittrex: Bittrex = new BittrexClient({
+const bittrex = new BittrexClient({
     key: '',
     secret: ''
     agent: true
 });
 
-bittrex.ticker('BTC-NEO').then((ticker: Ticker) => {
+bittrex.ticker('BTC-NEO').then((ticker) => {
 	console.log(ticker);
 }, (error) => {
 	console.log(error);

@@ -1,14 +1,8 @@
 import BigNumber from 'bignumber.js';
 import {JsonObject, JsonProperty} from 'json2typescript';
 
-export interface Ticker {
-	Bid: BigNumber;
-	Ask: BigNumber;
-	Last: BigNumber;
-}
-
 @JsonObject
-export class TickerData implements Ticker {
+export class TickerData {
 	@JsonProperty()
 	Bid: BigNumber = undefined;
 	@JsonProperty()

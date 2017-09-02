@@ -1,15 +1,16 @@
-import { Ticker } from './Ticker';
+import { BalanceData, OrderHistoryData, TickerData } from './model';
 import { TransportOptions } from './Transport';
-import { OrderHistory } from './OrderHistory';
 export interface Bittrex {
     options: TransportOptions;
-    ticker(market: string): Promise<Ticker>;
-    orderHistory(market?: string): Promise<OrderHistory[]>;
+    ticker(market: string): Promise<TickerData>;
+    balances(): Promise<BalanceData[]>;
+    orderHistory(market?: string): Promise<OrderHistoryData[]>;
 }
 export declare class BittrexClient implements Bittrex {
     options: TransportOptions;
     private transport;
     constructor(options: TransportOptions);
-    ticker(market: string): Promise<Ticker>;
-    orderHistory(market?: string): Promise<OrderHistory[]>;
+    balances(): Promise<BalanceData[]>;
+    ticker(market: string): Promise<TickerData>;
+    orderHistory(market?: string): Promise<OrderHistoryData[]>;
 }

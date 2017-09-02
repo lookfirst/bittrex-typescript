@@ -1,25 +1,8 @@
 import BigNumber from 'bignumber.js';
 import {JsonObject, JsonProperty} from 'json2typescript';
 
-export interface OrderHistory {
-	OrderUuid: string; // fd97d393-e9b9-4dd1-9dbf-f288fc72a185
-	Exchange: string; // BTC-LTC
-	TimeStamp: Date; // 2014-07-09T04:01:00.667
-	OrderType: string; // LIMIT_BUY
-	Limit: BigNumber; // 0.00000001
-	Quantity: BigNumber; // 100000.00000000
-	QuantityRemaining: BigNumber; // 100000.00000000
-	Commission: BigNumber; // 0.00000000
-	Price: BigNumber; // 0.00000000
-	PricePerUnit: BigNumber; // 0.00000000
-	IsConditional: boolean; // false
-	Condition: null; // null
-	ConditionTarget: null; // null
-	ImmediateOrCancel: boolean; // false
-}
-
 @JsonObject
-export class OrderHistoryData implements OrderHistory {
+export class OrderHistoryData {
 	@JsonProperty()
 	OrderUuid: string = undefined; // fd97d393-e9b9-4dd1-9dbf-f288fc72a185
 	@JsonProperty()

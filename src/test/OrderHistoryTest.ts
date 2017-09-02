@@ -1,4 +1,4 @@
-import {BittrexClient} from '../Bittrex';
+import {BittrexClient} from '../';
 import {Config} from './Config';
 
 const bittrex = new BittrexClient(Config.bittrex.readonly);

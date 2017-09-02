@@ -3,8 +3,8 @@ import {Config} from './Config';
 
 const bittrex = new BittrexClient(Config.bittrex.readonly);
 
-bittrex.ticker('BTC-NEO').then((ticker) => {
-	console.log(ticker);
+bittrex.balances().then((balances) => {
+	console.log(balances);
 }, (error) => {
 	console.log(error);
 });
