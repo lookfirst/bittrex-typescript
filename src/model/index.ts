@@ -1,3 +1,3 @@
 export {BalanceData} from './BalanceData';
-export {OrderHistoryData} from './OrderHistoryData';
+export {OrderData} from './OrderData';
 export {TickerData} from './TickerData';

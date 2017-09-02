@@ -1,10 +1,5 @@
 import BigNumber from 'bignumber.js';
-export interface Ticker {
-    Bid: BigNumber;
-    Ask: BigNumber;
-    Last: BigNumber;
-}
-export declare class TickerData implements Ticker {
+export declare class TickerData {
     Bid: BigNumber;
     Ask: BigNumber;
     Last: BigNumber;

@@ -1,3 +1,3 @@
 // Data objects
 export {Bittrex, BittrexClient} from './Bittrex';
-export {BalanceData, OrderHistoryData, TickerData} from './model';
+export {BalanceData, OrderData, TickerData} from './model';

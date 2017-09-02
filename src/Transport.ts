@@ -65,13 +65,7 @@ export class Transport {
 		return new Promise<T | T[]>((resolve, reject) => {
 			let bittrexResponse: BittrexResponse = this.jsonConvert.deserialize(response.body, BittrexResponse);
 			if (bittrexResponse.success) {
-				let converted: any;
-				if (bittrexResponse.result instanceof Array) {
-					converted = this.jsonConvert.deserializeArray(bittrexResponse.result, responseType);
-				} else {
-					converted = this.jsonConvert.deserialize(bittrexResponse.result, responseType);
-				}
-				return resolve(converted);
+				return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
 			} else {
 				return reject(bittrexResponse);
 			}

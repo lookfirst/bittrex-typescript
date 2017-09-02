@@ -1,4 +1,4 @@
-import {BalanceData, OrderHistoryData, TickerData} from './model';
+import {BalanceData, OrderData, TickerData} from './model';
 import {TransportOptions, Transport} from './Transport';
 
 export interface Bittrex {
@@ -19,7 +19,7 @@ export interface Bittrex {
 	// buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<OrderResult>;
 	// sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<OrderResult>;
 	// cancel(uuid: string): Promise<void>;
-	// openOrders(market: string): Promise<OpenOrder[]>;
+	openOrders(market: string): Promise<OrderData[]>;
 
 	// account
 
@@ -28,7 +28,7 @@ export interface Bittrex {
 	// depositAddress(currency: string): Promise<DepositAddress>;
 	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
 	// order(uuid: string): Promise<Order>;
-	orderHistory(market?: string): Promise<OrderHistoryData[]>;
+	orderHistory(market?: string): Promise<OrderData[]>;
 	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
 	// depositHistory(currency?: string): Promise<Transaction[]>;
 }
@@ -52,7 +52,11 @@ export class BittrexClient implements Bittrex {
 		return this.transport.request(TickerData, '/public/getticker', {market: market}) as Promise<TickerData>;
 	}
 
-	public async orderHistory(market?: string): Promise<OrderHistoryData[]> {
-		return this.transport.request(OrderHistoryData, '/account/getorderhistory', {market: market}) as Promise<OrderHistoryData[]>;
+	public async orderHistory(market?: string): Promise<OrderData[]> {
+		return this.transport.request(OrderData, '/account/getorderhistory', {market: market}) as Promise<OrderData[]>;
+	}
+
+	public async openOrders(market?: string): Promise<OrderData[]> {
+		return this.transport.request(OrderData, '/market/getopenorders', {market: market}) as Promise<OrderData[]>;
 	}
 }
