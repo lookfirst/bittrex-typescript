@@ -29,7 +29,7 @@ export class BittrexResponse {
 export class Transport {
 	private jsonConvert: JsonConvert = new JsonConvert();
 
-	constructor(public transportOptions: Partial<TransportOptions>) {
+	constructor(public transportOptions: TransportOptions) {
 		assert(!!this.transportOptions.key, 'key is required');
 		assert(!!this.transportOptions.secret, 'secret is required');
 

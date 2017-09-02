@@ -15,9 +15,9 @@ export declare class BittrexResponse {
     result: object | object[] | null;
 }
 export declare class Transport {
-    transportOptions: Partial<TransportOptions>;
+    transportOptions: TransportOptions;
     private jsonConvert;
-    constructor(transportOptions: Partial<TransportOptions>);
+    constructor(transportOptions: TransportOptions);
     request<T>(responseType: ClassType<T>, pathname: string, data?: {}): Promise<T | T[]>;
     private handleResponse<T>(responseType, response);
     private prepareRequest(pathname, data?);

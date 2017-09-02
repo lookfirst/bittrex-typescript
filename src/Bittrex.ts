@@ -1,5 +1,7 @@
-import {BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderData, TickerData} from './model';
-import {TransportOptions, Transport} from './Transport';
+import {BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderBookData, OrderData, TickerData} from './model';
+import {Transport} from './Transport';
+import {Agent} from 'https';
+import {OrderBookItem} from './model/OrderBookData';
 
 export interface Bittrex {
 	// public
@@ -9,7 +11,7 @@ export interface Bittrex {
 	ticker(market: string): Promise<TickerData>;
 	marketSummary(market: string): Promise<MarketSummaryData>;
 	marketSummaries(): Promise<MarketSummaryData[]>;
-	// orderBook(market: string, type: 'buy' | 'sell' | 'both', depth?: number): Promise<OrderBook>;
+	orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
 	// marketHistory(market: string): Promise<MarketHistory[]>;
 
 	// market
@@ -31,13 +33,21 @@ export interface Bittrex {
 	// depositHistory(currency?: string): Promise<Transaction[]>;
 }
 
+export class BittrexOptions {
+	key: string;
+	secret: string;
+	agent?: boolean | Agent | null;
+}
+
 export class BittrexClient implements Bittrex {
 	private transport: Transport;
 	private static BASE_URL: string = 'https://bittrex.com/api/v1.1';
 
-	constructor(options: TransportOptions) {
-		options.baseUrl = BittrexClient.BASE_URL;
-		this.transport = new Transport(options);
+	constructor(options: BittrexOptions) {
+		this.transport = new Transport({
+			...options,
+			baseUrl: BittrexClient.BASE_URL
+		});
 	}
 
 	// public
@@ -60,6 +70,15 @@ export class BittrexClient implements Bittrex {
 
 	public async marketSummaries(): Promise<MarketSummaryData[]> {
 		return this.transport.request(MarketSummaryData, '/public/getmarketsummaries') as Promise<MarketSummaryData[]>;
+	}
+
+	public async orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]> {
+		const pathname = '/public/getorderbook';
+		const data = {market: market, type: type};
+		if (type === 'both')
+			return this.transport.request(OrderBookData, pathname, data) as Promise<OrderBookData>;
+		else
+			return this.transport.request(OrderBookItem, pathname, data) as Promise<OrderBookItem[]>;
 	}
 
 	// market
