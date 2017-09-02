@@ -31,4 +31,4 @@ bittrex.ticker('BTC-NEO').then((ticker) => {
 
 ```
 
-Donate: 18zrUSJzvtxDmaGaThAZuR1GPMe2jwjmxW
+Donate BTC: 18zrUSJzvtxDmaGaThAZuR1GPMe2jwjmxW
