@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { BalanceData, CurrencyData, MarketData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData } from './model';
+import { BalanceData, CurrencyData, MarketData, MarketHistoryData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData } from './model';
 import { Agent } from 'https';
 import { OrderBookItem } from './model/OrderBookData';
 import BigNumber from 'bignumber.js';
@@ -7,6 +7,7 @@ export interface Bittrex {
     markets(): Promise<MarketData[]>;
     currencies(): Promise<CurrencyData[]>;
     ticker(market: string): Promise<TickerData>;
+    marketHistory(market: string): Promise<MarketHistoryData[]>;
     marketSummary(market: string): Promise<MarketSummaryData>;
     marketSummaries(): Promise<MarketSummaryData[]>;
     orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
@@ -31,6 +32,7 @@ export declare class BittrexClient implements Bittrex {
     markets(): Promise<MarketData[]>;
     currencies(): Promise<CurrencyData[]>;
     ticker(market: string): Promise<TickerData>;
+    marketHistory(market: string): Promise<MarketHistoryData[]>;
     marketSummary(market: string): Promise<MarketSummaryData>;
     marketSummaries(): Promise<MarketSummaryData[]>;
     orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;

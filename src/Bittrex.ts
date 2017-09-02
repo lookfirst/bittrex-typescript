@@ -2,6 +2,7 @@ import {
 	BalanceData,
 	CurrencyData,
 	MarketData,
+	MarketHistoryData,
 	MarketSummaryData,
 	OrderBookData,
 	OrderData,
@@ -22,13 +23,14 @@ export interface Bittrex {
 
 	ticker(market: string): Promise<TickerData>;
 
+	marketHistory(market: string): Promise<MarketHistoryData[]>;
+
 	marketSummary(market: string): Promise<MarketSummaryData>;
 
 	marketSummaries(): Promise<MarketSummaryData[]>;
 
 	orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
 
-	// marketHistory(market: string): Promise<MarketHistory[]>;
 
 	// market
 
@@ -85,6 +87,10 @@ export class BittrexClient implements Bittrex {
 
 	public async ticker(market: string): Promise<TickerData> {
 		return this.transport.request(TickerData, '/public/getticker', {market: market}) as Promise<TickerData>;
+	}
+
+	public async marketHistory(market: string): Promise<MarketHistoryData[]> {
+		return this.transport.request(MarketHistoryData, '/public/getmarkethistory', {market: market}) as Promise<MarketHistoryData[]>;
 	}
 
 	public async marketSummary(market: string): Promise<MarketSummaryData> {
