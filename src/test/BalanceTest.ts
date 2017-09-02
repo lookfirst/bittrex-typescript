@@ -8,3 +8,9 @@ bittrex.balances().then((balances) => {
 }, (error) => {
 	console.log(error);
 });
+
+bittrex.balance('BTC').then((balance) => {
+	console.log(balance);
+}, (error) => {
+	console.log(error);
+});

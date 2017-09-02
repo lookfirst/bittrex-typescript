@@ -24,7 +24,7 @@ export interface Bittrex {
 	// account
 
 	balances(): Promise<BalanceData[]>;
-	// balance(currency: string): Promise<Balance>;
+	balance(currency: string): Promise<BalanceData>;
 	// depositAddress(currency: string): Promise<DepositAddress>;
 	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
 	// order(uuid: string): Promise<Order>;
@@ -38,6 +38,10 @@ export class BittrexClient implements Bittrex {
 
 	constructor(public options: TransportOptions) {
 		this.transport = new Transport(options);
+	}
+
+	public async balance(currency: string): Promise<BalanceData> {
+		return this.transport.request(BalanceData, '/account/getbalance', {currency: currency}) as Promise<BalanceData>;
 	}
 
 	public async balances(): Promise<BalanceData[]> {
