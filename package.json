@@ -2,7 +2,8 @@
   "name": "bittrex-typescript",
   "version": "1.0.1",
   "description": "Bittrex client using typescript",
-  "main": "index.js",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "author": "Jon Stevens <latchkey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -13,7 +14,6 @@
     "tslib": "^1.7.1",
     "typescript": "^2.5.2"
   },
-  "types": "src/index.d.ts",
   "dependencies": {
     "bignumber.js": "^4.0.3",
     "got": "^7.1.0",
