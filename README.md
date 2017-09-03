@@ -1,5 +1,9 @@
 # bittrex-typescript client
 
+[![npm version](https://badge.fury.io/js/bittrex-typescript.svg)](https://badge.fury.io/js/bittrex-typescript)
+[![Dependency Status](https://david-dm.org/boennemann/badges.svg)](https://david-dm.org/boennemann/badges)
+
+
 ## About
 
 I looked at all of the bittrex API clients that I could find. None of them supported HTTP KeepAlive. None of them did TypeScript generics well. All of them needed help. So, what else do you do? Write your own.
