@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as crypto from 'crypto';
 import * as qs from 'query-string';
 import * as got from 'got';
-import {JsonConvert, JsonObject, JsonProperty} from 'json2typescript';
+import {JsonConvert} from 'json2typescript';
 import {Agent} from 'https';
 
 export declare type ClassType<T> = {
@@ -16,14 +16,10 @@ export interface TransportOptions {
 	agent?: boolean | Agent;
 }
 
-@JsonObject
 export class BittrexResponse {
-	@JsonProperty()
-	success: boolean = undefined;
-	@JsonProperty()
-	message: string = undefined;
-	@JsonProperty()
-	result: object | object[] | null = undefined;
+	success:boolean;
+	message: string;
+	result: object | object[] | null;
 }
 
 export class Transport {
@@ -51,11 +47,15 @@ export class Transport {
 
 	private handleResponse<T>(responseType: ClassType<T>, response: got.Response<Object>): Promise<T | T[]> {
 		return new Promise<T | T[]>((resolve, reject) => {
-			let bittrexResponse: BittrexResponse = this.jsonConvert.deserialize(response.body, BittrexResponse);
+			let bittrexResponse = response.body as BittrexResponse;
 			if (bittrexResponse.success) {
 				return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
 			} else {
-				return reject(bittrexResponse);
+				let error = new BittrexResponse();
+				error.success = bittrexResponse.success;
+				error.message = bittrexResponse.message;
+				error.result = bittrexResponse.result;
+				return reject(error);
 			}
 		});
 	}
