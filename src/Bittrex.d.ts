@@ -1,8 +1,9 @@
 /// <reference types="node" />
-import { BalanceData, CurrencyData, MarketData, MarketHistoryData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData } from './model';
+import { BalanceData, CurrencyData, DepositAddressData, MarketData, MarketHistoryData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData } from './model';
 import { Agent } from 'https';
 import { OrderBookItem } from './model/OrderBookData';
 import BigNumber from 'bignumber.js';
+import { RetryOptions } from 'retry-promise-typescript';
 export interface Bittrex {
     markets(): Promise<MarketData[]>;
     currencies(): Promise<CurrencyData[]>;
@@ -15,10 +16,11 @@ export interface Bittrex {
     sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
     cancel(uuid: string): Promise<null>;
     openOrders(market: string): Promise<OrderData[]>;
-    balances(): Promise<BalanceData[]>;
     balance(currency: string): Promise<BalanceData>;
+    balances(): Promise<BalanceData[]>;
     order(uuid: string): Promise<OrderData>;
     orders(market?: string): Promise<OrderData[]>;
+    depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
 }
 export declare class BittrexOptions {
     key: string;
@@ -44,4 +46,5 @@ export declare class BittrexClient implements Bittrex {
     balances(): Promise<BalanceData[]>;
     order(uuid: string): Promise<OrderData>;
     orders(market?: string): Promise<OrderData[]>;
+    depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
 }

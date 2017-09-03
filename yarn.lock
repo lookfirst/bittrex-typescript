@@ -190,6 +190,10 @@ query-string@^5.0.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
+retry-promise-typescript@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/retry-promise-typescript/-/retry-promise-typescript-1.0.5.tgz#620ec7b90c49edc79203e2bf568a640fc7ed5ded"
+
 safe-buffer@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"

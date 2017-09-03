@@ -1,5 +1,6 @@
 export { BalanceData } from './BalanceData';
 export { CurrencyData } from './CurrencyData';
+export { DepositAddressData } from './DepositAddressData';
 export { MarketData } from './MarketData';
 export { MarketHistoryData } from './MarketHistoryData';
 export { MarketSummaryData } from './MarketSummaryData';

@@ -18,6 +18,7 @@
     "got": "^7.1.0",
     "json2typescript": "^1.0.2",
     "query-string": "^5.0.0",
+    "retry-promise-typescript": "^1.0.5",
     "tslib": "^1.7.1"
   },
   "engines": {

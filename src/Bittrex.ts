@@ -1,6 +1,7 @@
 import {
 	BalanceData,
 	CurrencyData,
+	DepositAddressData,
 	MarketData,
 	MarketHistoryData,
 	MarketSummaryData,
@@ -13,6 +14,7 @@ import {Transport} from './Transport';
 import {Agent} from 'https';
 import {OrderBookItem} from './model/OrderBookData';
 import BigNumber from 'bignumber.js';
+import {RetryOptions, RetryPromise} from 'retry-promise-typescript';
 
 export interface Bittrex {
 	// public
@@ -44,15 +46,17 @@ export interface Bittrex {
 
 	// account
 
-	balances(): Promise<BalanceData[]>;
-
 	balance(currency: string): Promise<BalanceData>;
 
-	// depositAddress(currency: string): Promise<DepositAddress>;
-	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
+	balances(): Promise<BalanceData[]>;
+
 	order(uuid: string): Promise<OrderData>;
 
 	orders(market?: string): Promise<OrderData[]>;
+
+	depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
+
+	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
 
 	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
 	// depositHistory(currency?: string): Promise<Transaction[]>;
@@ -152,5 +156,11 @@ export class BittrexClient implements Bittrex {
 
 	public async orders(market?: string): Promise<OrderData[]> {
 		return this.transport.request(OrderData, '/account/getorderhistory', {market: market}) as Promise<OrderData[]>;
+	}
+
+	public async depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData> {
+		return new RetryPromise(retryOptions).retry(
+			this.transport.request(DepositAddressData, '/account/getdepositaddress', {currency: currency}) as Promise<DepositAddressData>
+		);
 	}
 }
