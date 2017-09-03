@@ -1,15 +1,16 @@
 import BigNumber from 'bignumber.js';
 import {JsonObject, JsonProperty} from 'json2typescript';
+import {BigNumberConverter} from './DataConverter';
 
 @JsonObject
 export class BalanceData {
 	@JsonProperty()
 	Currency: string = undefined;
-	@JsonProperty()
+	@JsonProperty('Balance', BigNumberConverter, false)
 	Balance: BigNumber = undefined;
-	@JsonProperty()
+	@JsonProperty('Available', BigNumberConverter, false)
 	Available: BigNumber = undefined;
-	@JsonProperty()
+	@JsonProperty('Pending', BigNumberConverter, false)
 	Pending: BigNumber = undefined;
 	@JsonProperty()
 	CryptoAddress: string = undefined;

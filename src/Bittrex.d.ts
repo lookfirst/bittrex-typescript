@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { BalanceData, CurrencyData, DepositAddressData, MarketData, MarketHistoryData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData } from './model';
+import { BalanceData, CurrencyData, DepositData, DepositAddressData, MarketData, MarketHistoryData, MarketSummaryData, OrderBookData, OrderData, TickerData, UuidData, WithdrawalData } from './model';
 import { Agent } from 'https';
 import { OrderBookItem } from './model/OrderBookData';
 import BigNumber from 'bignumber.js';
@@ -22,6 +22,8 @@ export interface Bittrex {
     orders(market?: string): Promise<OrderData[]>;
     depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
     withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
+    withdrawalHistory(currency?: string): Promise<WithdrawalData[]>;
+    depositHistory(currency?: string): Promise<DepositData[]>;
 }
 export declare class BittrexOptions {
     key: string;
@@ -49,4 +51,6 @@ export declare class BittrexClient implements Bittrex {
     orders(market?: string): Promise<OrderData[]>;
     depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
     withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
+    withdrawalHistory(currency?: string): Promise<WithdrawalData[]>;
+    depositHistory(currency?: string): Promise<DepositData[]>;
 }

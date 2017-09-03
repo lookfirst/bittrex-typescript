@@ -1,6 +1,7 @@
 import {
 	BalanceData,
 	CurrencyData,
+	DepositData,
 	DepositAddressData,
 	MarketData,
 	MarketHistoryData,
@@ -8,7 +9,8 @@ import {
 	OrderBookData,
 	OrderData,
 	TickerData,
-	UuidData
+	UuidData,
+	WithdrawalData
 } from './model';
 import {Transport} from './Transport';
 import {Agent} from 'https';
@@ -17,49 +19,34 @@ import BigNumber from 'bignumber.js';
 import {RetryOptions, RetryPromise} from 'retry-promise-typescript';
 
 export interface Bittrex {
+
 	// public
 
 	markets(): Promise<MarketData[]>;
-
 	currencies(): Promise<CurrencyData[]>;
-
 	ticker(market: string): Promise<TickerData>;
-
 	marketHistory(market: string): Promise<MarketHistoryData[]>;
-
 	marketSummary(market: string): Promise<MarketSummaryData>;
-
 	marketSummaries(): Promise<MarketSummaryData[]>;
-
 	orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
-
 
 	// market
 
 	buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
-
 	sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
-
 	cancel(uuid: string): Promise<null>;
-
 	openOrders(market: string): Promise<OrderData[]>;
 
 	// account
 
 	balance(currency: string): Promise<BalanceData>;
-
 	balances(): Promise<BalanceData[]>;
-
 	order(uuid: string): Promise<OrderData>;
-
 	orders(market?: string): Promise<OrderData[]>;
-
 	depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
-
 	withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
-
-	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
-	// depositHistory(currency?: string): Promise<Transaction[]>;
+	withdrawalHistory(currency?: string): Promise<WithdrawalData[]>;
+	depositHistory(currency?: string): Promise<DepositData[]>;
 }
 
 export class BittrexOptions {
@@ -168,4 +155,11 @@ export class BittrexClient implements Bittrex {
 		return this.transport.request(UuidData, '/account/withdraw', {currency: currency, quantity: quantity, address: address, paymentid: paymentId}) as Promise<UuidData>;
 	}
 
+	public withdrawalHistory(currency?: string): Promise<WithdrawalData[]> {
+		return this.transport.request(WithdrawalData, '/account/getwithdrawalhistory', {currency: currency}) as Promise<WithdrawalData[]>;
+	}
+
+	public depositHistory(currency?: string): Promise<DepositData[]> {
+		return this.transport.request(DepositData, '/account/getdeposithistory', {currency: currency}) as Promise<DepositData[]>;
+	}
 }
