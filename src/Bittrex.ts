@@ -56,7 +56,7 @@ export interface Bittrex {
 
 	depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
 
-	// withdraw(currency: string, quantity: BigNumber, address: string, paymentid?: string): Promise<WithdrawalConfirmation>;
+	withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
 
 	// withdrawalHistory(currency?: string): Promise<Transaction[]>;
 	// depositHistory(currency?: string): Promise<Transaction[]>;
@@ -163,4 +163,9 @@ export class BittrexClient implements Bittrex {
 			this.transport.request(DepositAddressData, '/account/getdepositaddress', {currency: currency}) as Promise<DepositAddressData>
 		);
 	}
+
+	public async withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData> {
+		return this.transport.request(UuidData, '/account/withdraw', {currency: currency, quantity: quantity, address: address, paymentid: paymentId}) as Promise<UuidData>;
+	}
+
 }

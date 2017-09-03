@@ -21,6 +21,7 @@ export interface Bittrex {
     order(uuid: string): Promise<OrderData>;
     orders(market?: string): Promise<OrderData[]>;
     depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
+    withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
 }
 export declare class BittrexOptions {
     key: string;
@@ -47,4 +48,5 @@ export declare class BittrexClient implements Bittrex {
     order(uuid: string): Promise<OrderData>;
     orders(market?: string): Promise<OrderData[]>;
     depositAddress(currency: string, retryOptions?: RetryOptions): Promise<DepositAddressData>;
+    withdraw(currency: string, quantity: number | BigNumber, address: string, paymentId?: string): Promise<UuidData>;
 }
