@@ -51,11 +51,7 @@ export class Transport {
 			if (bittrexResponse.success) {
 				return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
 			} else {
-				let error = new BittrexResponse();
-				error.success = bittrexResponse.success;
-				error.message = bittrexResponse.message;
-				error.result = bittrexResponse.result;
-				return reject(error);
+				return reject(Object.assign(new BittrexResponse(), bittrexResponse));
 			}
 		});
 	}
