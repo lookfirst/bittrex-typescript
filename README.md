@@ -8,6 +8,8 @@ I'm open to a PR for removing the Node dependencies and making this work in a br
 
 I'd like to take the good parts from `agentkeepalive` and just use them to see if there is any real performance benefits.
 
+Todo: Implement the [websockets portion of the API](https://github.com/n0mad01/node.bittrex.api/issues/44#issuecomment-323082393).
+
 ## Usage
 
 ```
