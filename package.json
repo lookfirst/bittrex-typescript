@@ -1,10 +1,10 @@
 {
   "name": "bittrex-typescript",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Bittrex client using typescript",
   "main": "src/index.js",
   "types": "src/index.d.ts",
-  "author": "Jon Stevens <latchkey@gmail.com>",
+  "author": "Jon S. Stevens <latchkey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/got": "^7.1.3",
@@ -23,5 +23,20 @@
   },
   "engines": {
     "node": "8.x.x"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lookfirst/bittrex-typescript.git"
+  },
+  "keywords": [
+    "bittrex",
+    "typescript",
+    "nodejs",
+    "client",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/lookfirst/bittrex-typescript/issues"
+  },
+  "homepage": "https://github.com/lookfirst/bittrex-typescript#readme"
 }
