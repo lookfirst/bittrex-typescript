@@ -84,8 +84,12 @@ export class BittrexClient implements Bittrex {
 		return this.transport.request(MarketHistoryData, '/public/getmarkethistory', {market: market}) as Promise<MarketHistoryData[]>;
 	}
 
+	/**
+	 * The Bittrex API is stupid. It returns an [] of MarketSummaryData when it should only return one item, so we unwind that.
+	 */
 	public async marketSummary(market: string): Promise<MarketSummaryData> {
-		return this.transport.request(MarketSummaryData, '/public/getmarketsummary', {market: market}) as Promise<MarketSummaryData>;
+		const promise = this.transport.request(MarketSummaryData, '/public/getmarketsummary', {market: market}) as Promise<MarketSummaryData[]>;
+		return promise.then((result:MarketSummaryData[]) => { return result[0]; });
 	}
 
 	public async marketSummaries(): Promise<MarketSummaryData[]> {

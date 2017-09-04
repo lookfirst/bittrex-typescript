@@ -38,6 +38,9 @@ export declare class BittrexClient implements Bittrex {
     currencies(): Promise<CurrencyData[]>;
     ticker(market: string): Promise<TickerData>;
     marketHistory(market: string): Promise<MarketHistoryData[]>;
+    /**
+     * The Bittrex API is stupid. It returns an [] of MarketSummaryData when it should only return one item, so we unwind that.
+     */
     marketSummary(market: string): Promise<MarketSummaryData>;
     marketSummaries(): Promise<MarketSummaryData[]>;
     orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
