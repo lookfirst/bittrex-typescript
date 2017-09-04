@@ -13,13 +13,15 @@ export declare class BittrexResponse {
     success: boolean;
     message: string;
     result: object | object[] | null;
+    pathname?: string;
+    data?: object;
 }
 export declare class Transport {
     transportOptions: TransportOptions;
     private jsonConvert;
     constructor(transportOptions: TransportOptions);
     request<T>(responseType: ClassType<T>, pathname: string, data?: {}): Promise<T | T[]>;
-    private handleResponse<T>(responseType, response);
+    private handleResponse<T>(responseType, response, pathname, data);
     private prepareRequest(pathname, data?);
     private removeUndefined(obj);
 }

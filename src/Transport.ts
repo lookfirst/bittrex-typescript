@@ -20,6 +20,8 @@ export class BittrexResponse {
 	success:boolean;
 	message: string;
 	result: object | object[] | null;
+	pathname?: string;
+	data?: object;
 }
 
 export class Transport {
@@ -41,16 +43,18 @@ export class Transport {
 	public async request<T>(responseType: ClassType<T>, pathname: string, data = {}): Promise<T | T[]> {
 		const {url, opts} = this.prepareRequest(pathname, data);
 		return got(url, opts).then((response: got.Response<Object>) => {
-			return this.handleResponse(responseType, response);
+			return this.handleResponse(responseType, response, pathname, data);
 		});
 	}
 
-	private handleResponse<T>(responseType: ClassType<T>, response: got.Response<Object>): Promise<T | T[]> {
+	private handleResponse<T>(responseType: ClassType<T>, response: got.Response<Object>, pathname: string, data: object): Promise<T | T[]> {
 		return new Promise<T | T[]>((resolve, reject) => {
 			let bittrexResponse = response.body as BittrexResponse;
 			if (bittrexResponse.success) {
 				return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
 			} else {
+				bittrexResponse.pathname = pathname;
+				bittrexResponse.data = data;
 				return reject(Object.assign(new BittrexResponse(), bittrexResponse));
 			}
 		});

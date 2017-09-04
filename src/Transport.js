@@ -26,16 +26,18 @@ class Transport {
     async request(responseType, pathname, data = {}) {
         const { url, opts } = this.prepareRequest(pathname, data);
         return got(url, opts).then((response) => {
-            return this.handleResponse(responseType, response);
+            return this.handleResponse(responseType, response, pathname, data);
         });
     }
-    handleResponse(responseType, response) {
+    handleResponse(responseType, response, pathname, data) {
         return new Promise((resolve, reject) => {
             let bittrexResponse = response.body;
             if (bittrexResponse.success) {
                 return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
             }
             else {
+                bittrexResponse.pathname = pathname;
+                bittrexResponse.data = data;
                 return reject(Object.assign(new BittrexResponse(), bittrexResponse));
             }
         });
