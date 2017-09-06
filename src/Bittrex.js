@@ -9,6 +9,20 @@ class BittrexOptions {
 exports.BittrexOptions = BittrexOptions;
 class BittrexClient {
     constructor(options) {
+        /**
+         * The Bittrex API is stupid. The API returns the MarketName inverted. USDT-BTC is really BTC-USDT.
+         * So, keep the documented behavior and set the DisplayMarketName since the API doesn't return
+         * that documented value anyway.
+         */
+        this.displayMarketName = (marketSummary) => {
+            marketSummary.DisplayMarketName = marketSummary.MarketName.split('-').reverse().join('-');
+            return marketSummary;
+        };
+        this.displayMarketNames = (marketSummaries) => {
+            return marketSummaries.map((marketSummary) => {
+                return this.displayMarketName(marketSummary);
+            });
+        };
         this.transport = new Transport_1.Transport(Object.assign({}, options, { baseUrl: BittrexClient.BASE_URL }));
     }
     // public
@@ -29,10 +43,11 @@ class BittrexClient {
      */
     async marketSummary(market) {
         const promise = this.transport.request(model_1.MarketSummaryData, '/public/getmarketsummary', { market: market });
-        return promise.then((result) => { return result[0]; });
+        return promise.then((result) => { return this.displayMarketName(result[0]); });
     }
     async marketSummaries() {
-        return this.transport.request(model_1.MarketSummaryData, '/public/getmarketsummaries');
+        const promise = this.transport.request(model_1.MarketSummaryData, '/public/getmarketsummaries');
+        return promise.then((results) => { return this.displayMarketNames(results); });
     }
     async orderBook(market, type) {
         const pathname = '/public/getorderbook';

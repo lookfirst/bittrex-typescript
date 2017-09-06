@@ -89,12 +89,29 @@ export class BittrexClient implements Bittrex {
 	 */
 	public async marketSummary(market: string): Promise<MarketSummaryData> {
 		const promise = this.transport.request(MarketSummaryData, '/public/getmarketsummary', {market: market}) as Promise<MarketSummaryData[]>;
-		return promise.then((result:MarketSummaryData[]) => { return result[0]; });
+		return promise.then((result:MarketSummaryData[]) => { return this.displayMarketName(result[0]); });
 	}
 
 	public async marketSummaries(): Promise<MarketSummaryData[]> {
-		return this.transport.request(MarketSummaryData, '/public/getmarketsummaries') as Promise<MarketSummaryData[]>;
+		const promise = this.transport.request(MarketSummaryData, '/public/getmarketsummaries') as Promise<MarketSummaryData[]>;
+		return promise.then((results:MarketSummaryData[]) => { return this.displayMarketNames(results); });
 	}
+
+	/**
+	 * The Bittrex API is stupid. The API returns the MarketName inverted. USDT-BTC is really BTC-USDT.
+	 * So, keep the documented behavior and set the DisplayMarketName since the API doesn't return
+	 * that documented value anyway.
+	 */
+	private displayMarketName = (marketSummary: MarketSummaryData): MarketSummaryData => {
+		marketSummary.DisplayMarketName = marketSummary.MarketName.split('-').reverse().join('-');
+		return marketSummary;
+	};
+
+	private displayMarketNames = (marketSummaries: MarketSummaryData[]): MarketSummaryData[] => {
+		return marketSummaries.map((marketSummary) => {
+			return this.displayMarketName(marketSummary);
+		});
+	};
 
 	public async orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]> {
 		const pathname = '/public/getorderbook';

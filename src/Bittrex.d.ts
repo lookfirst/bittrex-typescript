@@ -43,6 +43,13 @@ export declare class BittrexClient implements Bittrex {
      */
     marketSummary(market: string): Promise<MarketSummaryData>;
     marketSummaries(): Promise<MarketSummaryData[]>;
+    /**
+     * The Bittrex API is stupid. The API returns the MarketName inverted. USDT-BTC is really BTC-USDT.
+     * So, keep the documented behavior and set the DisplayMarketName since the API doesn't return
+     * that documented value anyway.
+     */
+    private displayMarketName;
+    private displayMarketNames;
     orderBook(market: string, type: 'buy' | 'sell' | 'both'): Promise<OrderBookData | OrderBookItem[]>;
     buyLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
     sellLimit(market: string, quantity: number | string | BigNumber, rate: number | string | BigNumber): Promise<UuidData>;
