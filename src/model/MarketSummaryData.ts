@@ -4,6 +4,8 @@ import {BigNumberConverter, DateConverter} from './DataConverter';
 
 @JsonObject
 export class MarketSummaryData {
+	@JsonProperty('DisplayMarketName', undefined, true)
+	DisplayMarketName: string = undefined;
 	@JsonProperty()
 	MarketName: string = undefined;
 	@JsonProperty('High', BigNumberConverter, false)
@@ -30,6 +32,4 @@ export class MarketSummaryData {
 	PrevDay: BigNumber = undefined;
 	@JsonProperty('Created', DateConverter, false)
 	Created: Date = undefined;
-	@JsonProperty('DisplayMarketName', undefined, true)
-	DisplayMarketName: string = undefined;
 }

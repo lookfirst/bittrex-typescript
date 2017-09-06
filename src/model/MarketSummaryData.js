@@ -6,6 +6,7 @@ const json2typescript_1 = require("json2typescript");
 const DataConverter_1 = require("./DataConverter");
 let MarketSummaryData = class MarketSummaryData {
     constructor() {
+        this.DisplayMarketName = undefined;
         this.MarketName = undefined;
         this.High = undefined;
         this.Low = undefined;
@@ -19,9 +20,12 @@ let MarketSummaryData = class MarketSummaryData {
         this.OpenSellOrders = undefined;
         this.PrevDay = undefined;
         this.Created = undefined;
-        this.DisplayMarketName = undefined;
     }
 };
+tslib_1.__decorate([
+    json2typescript_1.JsonProperty('DisplayMarketName', undefined, true),
+    tslib_1.__metadata("design:type", String)
+], MarketSummaryData.prototype, "DisplayMarketName", void 0);
 tslib_1.__decorate([
     json2typescript_1.JsonProperty(),
     tslib_1.__metadata("design:type", String)
@@ -74,10 +78,6 @@ tslib_1.__decorate([
     json2typescript_1.JsonProperty('Created', DataConverter_1.DateConverter, false),
     tslib_1.__metadata("design:type", Date)
 ], MarketSummaryData.prototype, "Created", void 0);
-tslib_1.__decorate([
-    json2typescript_1.JsonProperty('DisplayMarketName', undefined, true),
-    tslib_1.__metadata("design:type", String)
-], MarketSummaryData.prototype, "DisplayMarketName", void 0);
 MarketSummaryData = tslib_1.__decorate([
     json2typescript_1.JsonObject
 ], MarketSummaryData);
