@@ -11,6 +11,8 @@ let OrderData = class OrderData {
         this.Exchange = undefined; // BTC-LTC
         this.TimeStamp = undefined; // 2014-07-09T04:01:00.667
         this.OrderType = undefined; // LIMIT_BUY
+        /** /account/getorder returns Type: */
+        this.Type = undefined; // LIMIT_BUY
         this.Limit = undefined; // 0.00000001
         this.Quantity = undefined; // 100000.00000000
         this.QuantityRemaining = undefined; // 100000.00000000
@@ -44,9 +46,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Date)
 ], OrderData.prototype, "TimeStamp", void 0);
 tslib_1.__decorate([
-    json2typescript_1.JsonProperty(),
+    json2typescript_1.JsonProperty('OrderType', undefined, true),
     tslib_1.__metadata("design:type", String)
 ], OrderData.prototype, "OrderType", void 0);
+tslib_1.__decorate([
+    json2typescript_1.JsonProperty('Type', undefined, true),
+    tslib_1.__metadata("design:type", String)
+], OrderData.prototype, "Type", void 0);
 tslib_1.__decorate([
     json2typescript_1.JsonProperty('Limit', DataConverter_1.BigNumberConverter, true),
     tslib_1.__metadata("design:type", bignumber_js_1.default)

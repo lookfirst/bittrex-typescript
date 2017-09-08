@@ -5,6 +5,8 @@ export declare class OrderData {
     Exchange: string;
     TimeStamp: Date;
     OrderType: string;
+    /** /account/getorder returns Type: */
+    Type: string;
     Limit: BigNumber;
     Quantity: BigNumber;
     QuantityRemaining: BigNumber;

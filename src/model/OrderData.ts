@@ -12,8 +12,11 @@ export class OrderData {
 	Exchange: string = undefined; // BTC-LTC
 	@JsonProperty('TimeStamp', DateConverter, true)
 	TimeStamp: Date = undefined; // 2014-07-09T04:01:00.667
-	@JsonProperty()
+	@JsonProperty('OrderType', undefined, true)
 	OrderType: string = undefined; // LIMIT_BUY
+	/** /account/getorder returns Type: */
+	@JsonProperty('Type', undefined, true)
+	Type: string = undefined; // LIMIT_BUY
 	@JsonProperty('Limit', BigNumberConverter, true)
 	Limit: BigNumber = undefined; // 0.00000001
 	@JsonProperty('Quantity', BigNumberConverter, false)
