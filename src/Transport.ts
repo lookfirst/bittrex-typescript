@@ -22,6 +22,7 @@ export class BittrexResponse {
 	result: object | object[] | null;
 	pathname?: string;
 	data?: object;
+	error?: any;
 }
 
 export class Transport {
@@ -47,15 +48,24 @@ export class Transport {
 		});
 	}
 
+	private makeRejection(pathname: string, data: object, error: any, bittrexResponse: BittrexResponse): BittrexResponse {
+		bittrexResponse.pathname = pathname;
+		bittrexResponse.data = data;
+		bittrexResponse.error = error;
+		return Object.assign(new BittrexResponse(), bittrexResponse);
+	}
+
 	private handleResponse<T>(responseType: ClassType<T>, response: got.Response<Object>, pathname: string, data: object): Promise<T | T[]> {
 		return new Promise<T | T[]>((resolve, reject) => {
 			let bittrexResponse = response.body as BittrexResponse;
 			if (bittrexResponse.success) {
-				return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
+				try {
+					return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
+				} catch (error) {
+					return reject(this.makeRejection(pathname, data, error, bittrexResponse));
+				}
 			} else {
-				bittrexResponse.pathname = pathname;
-				bittrexResponse.data = data;
-				return reject(Object.assign(new BittrexResponse(), bittrexResponse));
+				return reject(this.makeRejection(pathname, data, null, bittrexResponse));
 			}
 		});
 	}

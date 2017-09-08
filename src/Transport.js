@@ -29,16 +29,25 @@ class Transport {
             return this.handleResponse(responseType, response, pathname, data);
         });
     }
+    makeRejection(pathname, data, error, bittrexResponse) {
+        bittrexResponse.pathname = pathname;
+        bittrexResponse.data = data;
+        bittrexResponse.error = error;
+        return Object.assign(new BittrexResponse(), bittrexResponse);
+    }
     handleResponse(responseType, response, pathname, data) {
         return new Promise((resolve, reject) => {
             let bittrexResponse = response.body;
             if (bittrexResponse.success) {
-                return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
+                try {
+                    return resolve(this.jsonConvert.deserialize(bittrexResponse.result, responseType));
+                }
+                catch (error) {
+                    return reject(this.makeRejection(pathname, data, error, bittrexResponse));
+                }
             }
             else {
-                bittrexResponse.pathname = pathname;
-                bittrexResponse.data = data;
-                return reject(Object.assign(new BittrexResponse(), bittrexResponse));
+                return reject(this.makeRejection(pathname, data, null, bittrexResponse));
             }
         });
     }
