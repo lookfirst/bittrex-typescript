@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 export declare class MarketSummaryData {
+    private static ONE;
     DisplayMarketName: string;
     MarketName: string;
     High: BigNumber;
@@ -14,4 +15,6 @@ export declare class MarketSummaryData {
     OpenSellOrders: number;
     PrevDay: BigNumber;
     Created: Date;
+    inverted: boolean;
+    invert(): MarketSummaryData;
 }

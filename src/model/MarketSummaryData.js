@@ -4,7 +4,7 @@ const tslib_1 = require("tslib");
 const bignumber_js_1 = require("bignumber.js");
 const json2typescript_1 = require("json2typescript");
 const DataConverter_1 = require("./DataConverter");
-let MarketSummaryData = class MarketSummaryData {
+let MarketSummaryData = MarketSummaryData_1 = class MarketSummaryData {
     constructor() {
         this.DisplayMarketName = undefined;
         this.MarketName = undefined;
@@ -20,8 +20,27 @@ let MarketSummaryData = class MarketSummaryData {
         this.OpenSellOrders = undefined;
         this.PrevDay = undefined;
         this.Created = undefined;
+        this.inverted = false;
+    }
+    invert() {
+        return Object.assign(new MarketSummaryData_1(), this, {
+            DisplayMarketName: this.MarketName,
+            MarketName: this.DisplayMarketName,
+            Last: MarketSummaryData_1.ONE.dividedBy(this.Last),
+            Ask: MarketSummaryData_1.ONE.dividedBy(this.Ask),
+            Bid: MarketSummaryData_1.ONE.dividedBy(this.Bid),
+            High: MarketSummaryData_1.ONE.dividedBy(this.High),
+            Low: MarketSummaryData_1.ONE.dividedBy(this.Low),
+            PrevDay: MarketSummaryData_1.ONE.dividedBy(this.PrevDay),
+            OpenSellOrders: this.OpenBuyOrders,
+            OpenBuyOrders: this.OpenSellOrders,
+            BaseVolume: this.Volume,
+            Volume: this.BaseVolume,
+            inverted: true
+        });
     }
 };
+MarketSummaryData.ONE = new bignumber_js_1.default(1);
 tslib_1.__decorate([
     json2typescript_1.JsonProperty('DisplayMarketName', undefined, true),
     tslib_1.__metadata("design:type", String)
@@ -78,8 +97,13 @@ tslib_1.__decorate([
     json2typescript_1.JsonProperty('Created', DataConverter_1.DateConverter, false),
     tslib_1.__metadata("design:type", Date)
 ], MarketSummaryData.prototype, "Created", void 0);
-MarketSummaryData = tslib_1.__decorate([
+tslib_1.__decorate([
+    json2typescript_1.JsonProperty('inverted', undefined, true),
+    tslib_1.__metadata("design:type", Boolean)
+], MarketSummaryData.prototype, "inverted", void 0);
+MarketSummaryData = MarketSummaryData_1 = tslib_1.__decorate([
     json2typescript_1.JsonObject
 ], MarketSummaryData);
 exports.MarketSummaryData = MarketSummaryData;
+var MarketSummaryData_1;
 //# sourceMappingURL=MarketSummaryData.js.map
