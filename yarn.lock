@@ -3,14 +3,14 @@
 
 
 "@types/got@^7.1.3":
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/@types/got/-/got-7.1.3.tgz#be029ec0ef9f7d9a1ea61303fec7aaba8c08d871"
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/@types/got/-/got-7.1.4.tgz#9fdf7ee8d8d2f3f1309320e1403336ea4f1b0c80"
   dependencies:
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^8.0.26":
-  version "8.0.26"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.26.tgz#4d58be925306fd22b1141085535a0268b8beb189"
+  version "8.0.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
 
 "@types/query-string@^5.0.0":
   version "5.0.0"
@@ -27,8 +27,8 @@ arrify@^1.0.0:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
 bignumber.js@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.0.3.tgz#b730be1a6025212b0836fdde0e93fb4f3359b133"
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.0.4.tgz#7c40f5abcd2d6623ab7b99682ee7db81b11889a4"
 
 chalk@^2.0.0:
   version "2.1.0"
@@ -59,8 +59,8 @@ decompress-response@^3.2.0:
     mimic-response "^1.0.0"
 
 diff@^3.1.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.0.tgz#056695150d7aa93237ca7e378ac3b1682b7963b9"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -97,15 +97,15 @@ has-flag@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
 
-has-symbol-support-x@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/has-symbol-support-x/-/has-symbol-support-x-1.4.0.tgz#442d89b1d0ac6cf5ff2f7b916ee539869b93a256"
+has-symbol-support-x@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/has-symbol-support-x/-/has-symbol-support-x-1.4.1.tgz#66ec2e377e0c7d7ccedb07a3a84d77510ff1bc4c"
 
 has-to-string-tag-x@^1.2.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/has-to-string-tag-x/-/has-to-string-tag-x-1.4.0.tgz#49d7bcde85c2409be38ac327e3e119a451657c7b"
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/has-to-string-tag-x/-/has-to-string-tag-x-1.4.1.tgz#a045ab383d7b4b2012a00148ab0aa5f290044d4d"
   dependencies:
-    has-symbol-support-x "^1.4.0"
+    has-symbol-support-x "^1.4.1"
 
 is-object@^1.0.1:
   version "1.0.1"
@@ -131,8 +131,8 @@ isurl@^1.0.0-alpha5:
     is-object "^1.0.1"
 
 json2typescript@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/json2typescript/-/json2typescript-1.0.2.tgz#417c5551e071b4a201e6251affff1658509bc889"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/json2typescript/-/json2typescript-1.0.3.tgz#439c227f261c473ca9cc4804377f688df950af5b"
 
 lowercase-keys@^1.0.0:
   version "1.0.0"
@@ -191,16 +191,16 @@ query-string@^5.0.0:
     strict-uri-encode "^1.0.0"
 
 retry-promise-typescript@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/retry-promise-typescript/-/retry-promise-typescript-1.0.5.tgz#620ec7b90c49edc79203e2bf568a640fc7ed5ded"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/retry-promise-typescript/-/retry-promise-typescript-1.0.7.tgz#8022315138a6fe5c057440656e4a6154cced9cc6"
 
 safe-buffer@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 source-map-support@^0.4.0:
-  version "0.4.16"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.16.tgz#16fecf98212467d017d586a2af68d628b9421cd8"
+  version "0.4.17"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.17.tgz#6f2150553e6375375d0ccb3180502b78c18ba430"
   dependencies:
     source-map "^0.5.6"
 

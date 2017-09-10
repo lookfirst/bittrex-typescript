@@ -1,6 +1,6 @@
 {
   "name": "bittrex-typescript",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Bittrex client using typescript",
   "main": "src/index.js",
   "types": "src/index.d.ts",
