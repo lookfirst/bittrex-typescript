@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/bittrex-typescript.svg)](https://badge.fury.io/js/bittrex-typescript)
 [![Dependency Status](https://david-dm.org/boennemann/badges.svg)](https://david-dm.org/boennemann/badges)
-
+[![Build Status](https://david-dm.org/boennemann/badges.svg)](https://travis-ci.org/lookfirst/bittrex-typescript)
 
 ## About
 
