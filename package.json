@@ -18,11 +18,9 @@
     "typescript": "^2.5.2"
   },
   "dependencies": {
-    "@types/moment": "^2.13.0",
     "bignumber.js": "^4.0.3",
     "got": "^7.1.0",
     "json2typescript": "^1.0.2",
-    "moment": "^2.20.0",
     "query-string": "^5.0.0",
     "retry-promise-typescript": "^1.0.5",
     "tslib": "^1.7.1"
