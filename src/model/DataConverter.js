@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const json2typescript_1 = require("json2typescript");
 const bignumber_js_1 = require("bignumber.js");
-const moment = require("moment");
 // Disable the error about 15 decimal places
 // Happens during Bittrex.marketSummaries()
 const BN = bignumber_js_1.default.another({ ERRORS: false });
@@ -12,7 +11,7 @@ let DateConverter = class DateConverter {
         return date.toTimeString();
     }
     deserialize(date) {
-        return moment.utc(date).toDate();
+        return new Date(date + 'Z');
     }
 };
 DateConverter = tslib_1.__decorate([
