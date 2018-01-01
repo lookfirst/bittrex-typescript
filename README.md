@@ -27,7 +27,7 @@ import {BittrexClient} from 'bittrex-typescript';
 
 const bittrex = new BittrexClient({
     key: '',
-    secret: ''
+    secret: '',
     agent: true // Turn on HTTP KeepAlive
 });
 
