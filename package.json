@@ -18,7 +18,7 @@
     "typescript": "^2.5.2"
   },
   "dependencies": {
-    "bignumber.js": "^4.0.3",
+    "bignumber.js": "^6.0.0",
     "got": "^7.1.0",
     "json2typescript": "^1.0.2",
     "query-string": "^5.0.0",
