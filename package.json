@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "bignumber.js": "^4.0.3",
-    "got": "^7.1.0",
+    "got": "^8.3.1",
     "json2typescript": "^1.0.2",
     "query-string": "^5.0.0",
     "retry-promise-typescript": "^1.0.5",
