@@ -3,6 +3,7 @@ cache:
   yarn: true
 node_js:
   - "8"
+  - "10"
 env:
   global:
     - BITTREX_KEY="bittrex-typescript-travis-key"
